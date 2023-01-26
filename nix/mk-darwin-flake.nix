@@ -34,9 +34,11 @@
     (import ./modules/mk-user.nix {inherit userName userHome userModules;})
     ./modules/activation-diff.nix
     ./modules/darwin-rebuild-overlay.nix
+    ./modules/emacs-overlay.nix
     ./modules/intel-overlay.nix
     ./modules/home-manager.nix
-    ./modules/niv-managed-dmg-overlay.nix
+    # disable niv for now
+    # ./modules/niv-managed-dmg-overlay.nix
     home-manager.darwinModules.home-manager
   ];
 
@@ -53,7 +55,9 @@
       apps.format = flake-utils.lib.mkApp {drv = alejandra;};
       checks.default = darwin.system;
       devShells.default = mkShell {
-        buildInputs = [nixVersions.stable niv alejandra];
+        buildInputs = [nixVersions.stable alejandra];
+        # disable niv for now
+        # buildInputs = [nixVersions.stable niv alejandra];
       };
     });
 
